@@ -40,7 +40,7 @@ def find_smallest_positive(xs):
         mid = (left + right) // 2
         if xs[mid] > y:
             right = mid
-         if xs[mid] < y:
+        if xs[mid] < y:
             left = mid + 1
         if xs[mid] == y:
             return True
