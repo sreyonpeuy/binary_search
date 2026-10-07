@@ -30,6 +30,28 @@ def find_smallest_positive(xs):
     >>> find_smallest_positive([-3, -2, -1]) is None
     True
     '''
+     if len(xs) == 0:
+        return False
+
+    left = 0
+    right = len(xs) - 1
+
+    while left != right:
+        mid = (left + right) // 2
+        if xs[mid] > y:
+            right = mid
+         if xs[mid] < y:
+            left = mid + 1
+        if xs[mid] == y:
+            return True
+            left = mid + 1
+
+    if xs[left] == y:
+        return True
+    else:
+        return False
+
+    return go(0, len(xs) - 1)
 
 
 def find_largest_negative(xs, lo=0, hi=None):
@@ -50,6 +72,24 @@ def find_largest_negative(xs, lo=0, hi=None):
     >>> find_largest_negative([-3, -2, -1])
     2
     '''
+        if len(xs) == 0:
+        return None
+
+    left = lo
+    right = len(xs) - 1 if hi is None else hi
+
+    while left != right:
+        mid = (left + right + 1) // 2
+
+        if xs[mid] < 0:
+            left = mid
+        else:
+            right = mid - 1
+
+    if xs[left] < 0:
+        return left
+    else:
+        return None
 
 
 def find_smallest(xs, lo=0, hi=None):
@@ -73,6 +113,21 @@ def find_smallest(xs, lo=0, hi=None):
     >>> find_smallest([]) is None
     True
     '''
+    if len(xs) == 0:
+        return None
+
+    left = lo
+    right = len(xs) - 1 if hi is None else hi
+
+    while left != right:
+        mid = (left + right) // 2
+
+        if xs[mid] > xs[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+
+    return left
 
 
 def count_repeats(xs, x):
@@ -96,3 +151,37 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
+
+def greater_than_x(xs, x):
+    '''
+    Use binary search to find the lowest index with a value >= x. Assume xs is a list of numbers sorted from highest to lowest. x is a number.
+    '''
+    if len(xs) == 0:
+        return None
+
+    if xs[0] >= x:
+        return 0
+    return None
+
+
+def less_than_x(xs, x):
+    '''
+    Use binary search to find the lowest index with a value < x.
+    '''
+    if len(xs) == 0:
+        return None
+
+    left = 0
+    right = len(xs) - 1
+    ans = None
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if xs[mid] < x:
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return ans

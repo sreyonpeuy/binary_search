@@ -92,7 +92,6 @@ def bounded_argmin(f, lo, hi, epsilon=1e-3):
         Each recursive call shrinks the interval to length <= (2/3)*(hi-lo).
         After k calls, length <= (2/3)^k * (hi-lo).
         We stop when length < epsilon, so we set
-        
             (2/3)^k * (hi-lo) < epsilon
 
         then solve for k to get
@@ -109,6 +108,16 @@ def bounded_argmin(f, lo, hi, epsilon=1e-3):
         the base of the log and the (hi-lo) factor drop out,
         giving us k = O(log 1/epsilon).
     '''
+    if( (hi - lo) < epsilon):
+        return (hi + low) / 2.0
+
+    m1 = lo + ((hi - lo) / 3.0))
+    m2 = hi - ((hi - lo) / 3.0))
+
+     if f(m1) < f(m2):
+        return bounded_argmin(f, lo, m2, epsilon)
+    else:
+        return bounded_argmin(f, m1, hi, epsilon)
 
 
 def find_boundaries(f):
@@ -127,3 +136,12 @@ def find_boundaries(f):
     else:
         you're done; return lo,hi
     '''
+    mid = (lo + hi) / 2.0
+
+    if f(lo) >  f(mid):
+        return find_boundaries(f, lo * 2.0, hi)
+     elif f(hi) < f(mid):
+        return find_boundaries(f, lo, hi * 2.0)
+    else:
+        return (lo, hi)
+
