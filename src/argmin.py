@@ -111,7 +111,7 @@ def bounded_argmin(f, lo, hi, epsilon=1e-3):
     if( (hi - lo) < epsilon):
         return (hi + low) / 2.0
 
-    m1 = lo + ((hi - lo) / 3.0))
+    m1 = lo + ((hi - lo) / 3.0)
     m2 = hi - ((hi - lo) / 3.0))
 
      if f(m1) < f(m2):
