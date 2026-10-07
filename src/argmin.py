@@ -108,8 +108,8 @@ def bounded_argmin(f, lo, hi, epsilon=1e-3):
         the base of the log and the (hi-lo) factor drop out,
         giving us k = O(log 1/epsilon).
     '''
-    if( (hi - lo) < epsilon):
-        return (hi + low) / 2.0
+    if((hi - lo) < epsilon):
+        return (hi + lo) / 2.0
 
     m1 = lo + ((hi - lo) / 3.0)
     m2 = hi - ((hi - lo) / 3.0)
@@ -136,6 +136,8 @@ def find_boundaries(f):
     else:
         you're done; return lo,hi
     '''
+    lo = 1.0
+    hi = 1.0
     mid = (lo + hi) / 2.0
 
     if f(lo) >  f(mid):
