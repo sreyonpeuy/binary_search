@@ -120,7 +120,7 @@ def bounded_argmin(f, lo, hi, epsilon=1e-3):
         return bounded_argmin(f, m1, hi, epsilon)
 
 
-def find_boundaries(f, lo=-1.0, h=1.0):
+def find_boundaries(f, lo=-1.0, hi=1.0):
     '''
     Returns a tuple (lo,hi).
     If f is a convex function, then the minimum is guaranteed to be between lo and hi.
