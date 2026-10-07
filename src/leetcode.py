@@ -154,14 +154,25 @@ def count_repeats(xs, x):
 
 def greater_than_x(xs, x):
     '''
-    Use binary search to find the lowest index with a value >= x. Assume xs is a list of numbers sorted from highest to lowest. x is a number.
+    Use binary search to find the lowest index with a value <= x. Assume xs is a list of numbers sorted from highest to lowest. x is a number.
     '''
     if len(xs) == 0:
         return None
 
-    if xs[0] >= x:
-        return 0
-    return None
+    left = 0
+    right = len(xs) - 1
+    ans = None
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if xs[mid] < x:
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return ans
 
 
 def less_than_x(xs, x):
