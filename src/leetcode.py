@@ -31,28 +31,23 @@ def find_smallest_positive(xs):
     True
     '''
     if len(xs) == 0:
-        return False
+        return None
 
     left = 0
     right = len(xs) - 1
 
     while left != right:
         mid = (left + right) // 2
-        if xs[mid] > y:
+        if xs[mid] > 0:
             right = mid
-        if xs[mid] < y:
-            left = mid + 1
-        if xs[mid] == y:
-            return True
+        if xs[mid] <= 0:
             left = mid + 1
 
-    if xs[left] == y:
-        return True
+    # After narrowing down to a single element where left == right:
+    if xs[left] > 0:
+        return left
     else:
-        return False
-
-    return go(0, len(xs) - 1)
-
+        return None
 
 def find_largest_negative(xs, lo=0, hi=None):
     '''
@@ -151,6 +146,10 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
+    start = greater_than_x(xs, x)
+    end = less_than_x(xs, x)
+    return end - start
+
 
 def greater_than_x(xs, x):
     '''
