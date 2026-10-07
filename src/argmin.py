@@ -140,8 +140,7 @@ def find_boundaries(f):
 
     if f(lo) >  f(mid):
         return find_boundaries(f, lo * 2.0, hi)
-     elif f(hi) < f(mid):
+    elif f(hi) < f(mid):
         return find_boundaries(f, lo, hi * 2.0)
     else:
         return (lo, hi)
-
