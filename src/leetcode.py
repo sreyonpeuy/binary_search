@@ -147,52 +147,41 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
-    start = greater_than_x(xs, x)
-    end = less_than_x(xs, x)
+    start = find_first_lowest_index(xs, x)
+    end = find_next_lowest_index(xs, x)
     return end - start
 
 
-def greater_than_x(xs, x):
+def find_first_lowest_index(xs, x):
     '''
     Use binary search to find the lowest index with a value <= x. Assume xs is a list of numbers sorted from highest to lowest. x is a number.
     '''
-    if len(xs) == 0:
-        return None
-
     left = 0
-    right = len(xs) - 1
-    ans = None
+    right = len(xs)
 
-    while left <= right:
+    while left < right:
         mid = (left + right) // 2
-
-        if xs[mid] < x:
-            ans = mid
-            right = mid - 1
+        # Because xs is descending (e.g. [5, 4, 3, 2, 1]):
+        if xs[mid] <= x:
+            right = mid
         else:
             left = mid + 1
 
-    return ans
+    return left
 
 
-def less_than_x(xs, x):
+def find_next_lowest_index(xs, x):
     '''
     Use binary search to find the lowest index with a value < x.
     '''
-    if len(xs) == 0:
-        return None
-
     left = 0
-    right = len(xs) - 1
-    ans = None
+    right = len(xs)
 
-    while left <= right:
+    while left < right:
         mid = (left + right) // 2
-
         if xs[mid] < x:
-            ans = mid
-            right = mid - 1
+            right = mid
         else:
             left = mid + 1
 
-    return ans
+    return left
